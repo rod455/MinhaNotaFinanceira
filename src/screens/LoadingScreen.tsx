@@ -11,6 +11,7 @@ import { RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '../navigation/AppNavigator';
 import { COLORS, SPACING, BORDER_RADIUS } from '../constants/theme';
 import { calculateScore } from '../utils/scoring';
+import { showInterstitial } from '../utils/ads';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Loading'>;
@@ -29,7 +30,6 @@ export default function LoadingScreen({ navigation, route }: Props) {
   const { answers } = route.params;
   const progressAnim = useRef(new Animated.Value(0)).current;
   const [currentStep, setCurrentStep] = useState(0);
-  const fadeAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
     // Animate progress bar over 3 seconds
@@ -47,11 +47,16 @@ export default function LoadingScreen({ navigation, route }: Props) {
       });
     }, 700);
 
-    // Navigate to result after animation
-    const timer = setTimeout(() => {
+    // Show interstitial ad, then navigate to result
+    const timer = setTimeout(async () => {
       const score = calculateScore(answers);
+      try {
+        await showInterstitial();
+      } catch {
+        // Ad failed — continue to result
+      }
       navigation.replace('Result', { answers, score });
-    }, 3800);
+    }, 3500);
 
     return () => {
       clearTimeout(timer);
@@ -93,13 +98,6 @@ export default function LoadingScreen({ navigation, route }: Props) {
         <Text style={styles.disclaimer}>
           Sua nota é calculada com base nas suas respostas{'\n'}e dados
           estatísticos do mercado brasileiro.
-        </Text>
-      </View>
-
-      {/* Ad placeholder area */}
-      <View style={styles.adPlaceholder}>
-        <Text style={styles.adPlaceholderText}>
-          📢 Espaço para anúncio (Interstitial Ad)
         </Text>
       </View>
     </View>
@@ -193,22 +191,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: SPACING.xl,
     lineHeight: 16,
-  },
-  adPlaceholder: {
-    position: 'absolute',
-    bottom: SPACING.xl,
-    left: SPACING.lg,
-    right: SPACING.lg,
-    paddingVertical: SPACING.md,
-    backgroundColor: COLORS.navyLight,
-    borderRadius: BORDER_RADIUS.md,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: COLORS.gray700,
-    borderStyle: 'dashed',
-  },
-  adPlaceholderText: {
-    fontSize: 12,
-    color: COLORS.gray500,
   },
 });

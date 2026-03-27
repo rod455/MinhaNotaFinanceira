@@ -13,6 +13,8 @@ import { RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '../navigation/AppNavigator';
 import { COLORS, SPACING, BORDER_RADIUS } from '../constants/theme';
 import { generateActionPlan } from '../utils/actionPlan';
+import { showRewarded } from '../utils/ads';
+import AdBanner from '../components/AdBanner';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'ActionPlan'>;
@@ -93,19 +95,29 @@ export default function ActionPlanScreen({ navigation, route }: Props) {
             cronograma personalizado.
           </Text>
 
-          {/* In production, this would trigger a rewarded video ad */}
+          {/* Rewarded video ad triggers detailed plan */}
           <TouchableOpacity
             style={styles.unlockButton}
             activeOpacity={0.8}
-            onPress={() => navigation.navigate('DetailedPlan', { answers, score })}
+            onPress={async () => {
+              try {
+                const earned = await showRewarded();
+                if (earned) {
+                  navigation.navigate('DetailedPlan', { answers, score });
+                }
+              } catch {
+                // Ad failed — grant access anyway
+                navigation.navigate('DetailedPlan', { answers, score });
+              }
+            }}
           >
             <Text style={styles.unlockButtonText}>
-              ▶️ Desbloquear plano detalhado
+              ▶️ Assistir vídeo e desbloquear
             </Text>
           </TouchableOpacity>
 
           <Text style={styles.unlockDisclaimer}>
-            (Espaço para Rewarded Video Ad)
+            Assista um vídeo curto para desbloquear
           </Text>
         </View>
       </ScrollView>
@@ -130,6 +142,9 @@ export default function ActionPlanScreen({ navigation, route }: Props) {
           <Text style={styles.shareButtonText}>📤 Compartilhar</Text>
         </TouchableOpacity>
       </View>
+
+      {/* Banner Ad */}
+      <AdBanner />
     </View>
   );
 }

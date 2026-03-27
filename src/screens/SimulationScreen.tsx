@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -13,6 +13,8 @@ import { RootStackParamList } from '../navigation/AppNavigator';
 import { COLORS, SPACING, BORDER_RADIUS, SCORE_ZONES } from '../constants/theme';
 import { generateSimulations } from '../utils/actionPlan';
 import { SimulationScenario } from '../types';
+import { showInterstitial } from '../utils/ads';
+import AdBanner from '../components/AdBanner';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Simulation'>;
@@ -31,6 +33,11 @@ export default function SimulationScreen({ navigation, route }: Props) {
   const { answers, score } = route.params;
   const simulations = generateSimulations(answers);
   const [selectedSim, setSelectedSim] = useState<SimulationScenario | null>(null);
+
+  // Show interstitial ad when entering simulation screen
+  useEffect(() => {
+    showInterstitial().catch(() => {});
+  }, []);
 
   const currentZone = SCORE_ZONES[score.zone];
 
@@ -67,12 +74,7 @@ export default function SimulationScreen({ navigation, route }: Props) {
           </View>
         </View>
 
-        {/* Ad placeholder */}
-        <View style={styles.adPlaceholder}>
-          <Text style={styles.adPlaceholderText}>
-            📢 Espaço para anúncio (Interstitial entre simulações)
-          </Text>
-        </View>
+        {/* Interstitial shown on entry — triggered in useEffect */}
 
         {/* Simulations */}
         {simulations.length > 0 ? (
@@ -186,6 +188,9 @@ export default function SimulationScreen({ navigation, route }: Props) {
           <Text style={styles.shareButtonText}>📤 Compartilhar resultado</Text>
         </TouchableOpacity>
       </View>
+
+      {/* Banner Ad */}
+      <AdBanner />
     </View>
   );
 }
@@ -255,20 +260,6 @@ const styles = StyleSheet.create({
   currentZoneText: {
     fontSize: 12,
     fontWeight: '700',
-  },
-  adPlaceholder: {
-    paddingVertical: SPACING.sm,
-    backgroundColor: COLORS.navyLight,
-    borderRadius: BORDER_RADIUS.md,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: COLORS.gray700,
-    borderStyle: 'dashed',
-    marginBottom: SPACING.md,
-  },
-  adPlaceholderText: {
-    fontSize: 11,
-    color: COLORS.gray600,
   },
   simCard: {
     backgroundColor: COLORS.navyLight,

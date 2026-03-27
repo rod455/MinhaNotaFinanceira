@@ -14,6 +14,7 @@ import { RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '../navigation/AppNavigator';
 import { COLORS, SPACING, BORDER_RADIUS, SCORE_ZONES, NATIONAL_AVERAGE } from '../constants/theme';
 import { getContextualPhrase } from '../utils/scoring';
+import AdBanner from '../components/AdBanner';
 
 const { width } = Dimensions.get('window');
 
@@ -167,6 +168,9 @@ export default function ResultScreen({ navigation, route }: Props) {
           <Text style={styles.secondaryButtonText}>📤 Compartilhar resultado</Text>
         </TouchableOpacity>
       </View>
+
+      {/* Banner Ad */}
+      <AdBanner />
     </View>
   );
 }
