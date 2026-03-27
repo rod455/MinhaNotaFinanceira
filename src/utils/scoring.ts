@@ -41,26 +41,33 @@ function calcNivelDivida(answers: QuizAnswers): number {
 
   if (divida === 'nenhuma') return 20;
 
-  // Estimate debt midpoint
-  const debtMid: Record<DividaOption, number> = {
-    'nenhuma': 0,
-    'ate1000': 500,
-    '1000a5000': 3000,
-    '5000a20000': 12500,
-    'acima20000': 30000,
+  // Direct scoring: higher debt bracket = lower score
+  const basePenalty: Record<DividaOption, number> = {
+    'nenhuma': 20,
+    'ate1000': 14,
+    '1000a5000': 8,
+    '5000a20000': 4,
+    'acima20000': 0,
   };
 
-  const debt = debtMid[divida];
-  const monthlyIncome = Math.max(renda, 1320); // at least minimum wage
+  let score = basePenalty[divida];
 
-  const ratio = debt / monthlyIncome;
+  // Additional penalty if debt is high relative to income
+  if (renda > 0) {
+    const debtMid: Record<DividaOption, number> = {
+      'nenhuma': 0,
+      'ate1000': 500,
+      '1000a5000': 3000,
+      '5000a20000': 12500,
+      'acima20000': 30000,
+    };
+    const ratio = debtMid[divida] / Math.max(renda, 1320);
+    // If debt exceeds 3x monthly income, extra penalty
+    if (ratio > 3) score = Math.max(0, score - 4);
+    else if (ratio > 1.5) score = Math.max(0, score - 2);
+  }
 
-  if (ratio > 6) return 0;
-  if (ratio > 4) return 5;
-  if (ratio > 3) return 8;
-  if (ratio > 2) return 10;
-  if (ratio > 1) return 14;
-  return 18;
+  return score;
 }
 
 function calcAdimplencia(answers: QuizAnswers): number {
