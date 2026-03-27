@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "Minha Nota Financeira",
+    "slug": "minha-nota-financeira",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0B1838"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.appfactory.minhanotafinanceira"
+    },
+    "android": {
+      "package": "com.appfactory.minhanotafinanceira",
+      "adaptiveIcon": {
+        "backgroundColor": "#0B1838",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "permissions": [
+        "android.permission.INTERNET"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-font"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "minha-nota-financeira"
+      }
+    }
+  }
+}
