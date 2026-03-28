@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exclusão de Dados — Minha Nota Financeira</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #0B1838;
+      color: #CBD2D9;
+      line-height: 1.7;
+      padding: 0;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #0B1838, #060D1F);
+      padding: 48px 24px 32px;
+      text-align: center;
+      border-bottom: 3px solid #F5A820;
+    }
+
+    .header h1 {
+      color: #FFFFFF;
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .header .gold { color: #F5A820; }
+
+    .header p {
+      color: #9AA5B4;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 32px 24px 64px;
+    }
+
+    .update-date {
+      background: #132248;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #9AA5B4;
+      margin-bottom: 32px;
+      border-left: 4px solid #F5A820;
+    }
+
+    h2 {
+      color: #FFFFFF;
+      font-size: 20px;
+      font-weight: 700;
+      margin-top: 32px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #132248;
+    }
+
+    h3 {
+      color: #F5A820;
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+
+    ul, ol {
+      margin-bottom: 12px;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+
+    strong { color: #FFFFFF; }
+
+    a {
+      color: #17C8E8;
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    .highlight-box {
+      background: #132248;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+      border: 1px solid #1a2d5a;
+    }
+
+    .highlight-box.green {
+      border-left: 4px solid #1DBE75;
+    }
+
+    .highlight-box.gold {
+      border-left: 4px solid #F5A820;
+    }
+
+    .highlight-box.red {
+      border-left: 4px solid #E74C3C;
+    }
+
+    .steps {
+      counter-reset: step-counter;
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .steps li {
+      counter-increment: step-counter;
+      position: relative;
+      padding-left: 48px;
+      margin-bottom: 20px;
+    }
+
+    .steps li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 32px;
+      height: 32px;
+      background: #F5A820;
+      color: #0B1838;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      color: #F5A820;
+      font-size: 14px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid #132248;
+      font-size: 13px;
+      color: #616E7C;
+    }
+
+    .footer a { color: #F5A820; }
+
+    @media (max-width: 480px) {
+      .header h1 { font-size: 22px; }
+      .container { padding: 24px 16px 48px; }
+      h2 { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Exclusão de Dados</h1>
+  <h1><span class="gold">Minha Nota Financeira</span></h1>
+  <p>AppFactory (appfactory.rlm)</p>
+  <div class="nav-links">
+    <a href="/privacy-policy.html">Política de Privacidade</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="update-date">
+    <strong>Última atualização:</strong> 28 de março de 2026
+  </div>
+
+  <div class="highlight-box green">
+    <strong>Importante:</strong> O Minha Nota Financeira foi projetado com privacidade em mente.
+    Não coletamos dados pessoais identificáveis. Suas respostas ao questionário ficam
+    armazenadas <strong>apenas no seu dispositivo</strong>. Não há cadastro, login ou
+    conta de usuário.
+  </div>
+
+  <h2>1. Quais dados são armazenados?</h2>
+
+  <p>O aplicativo armazena localmente no seu dispositivo apenas:</p>
+  <ul>
+    <li>Suas respostas ao questionário financeiro (faixa de renda, gastos estimados, situação de dívida, sobra mensal e reserva de emergência)</li>
+    <li>Sua nota financeira calculada</li>
+    <li>Preferências de uso do aplicativo</li>
+  </ul>
+
+  <p>
+    <strong>Nenhum desses dados é enviado para nossos servidores de forma identificável.</strong>
+    Eles existem apenas no armazenamento local do seu dispositivo.
+  </p>
+
+  <h2>2. Como excluir seus dados do dispositivo</h2>
+
+  <p>Como todos os dados são armazenados localmente, você tem controle total sobre eles. Siga os passos abaixo:</p>
+
+  <h3>Opção A — Limpar dados pelo sistema (Android)</h3>
+  <ol class="steps">
+    <li>Acesse as <strong>Configurações</strong> do seu dispositivo Android</li>
+    <li>Toque em <strong>Aplicativos</strong> (ou "Apps" / "Gerenciador de aplicativos")</li>
+    <li>Encontre e toque em <strong>Minha Nota Financeira</strong></li>
+    <li>Toque em <strong>Armazenamento</strong> (ou "Armazenamento e cache")</li>
+    <li>Toque em <strong>Limpar dados</strong> e confirme</li>
+  </ol>
+
+  <div class="highlight-box gold">
+    <strong>Resultado:</strong> Todos os dados do aplicativo serão apagados do seu dispositivo,
+    incluindo respostas do questionário, nota financeira e preferências. O aplicativo
+    voltará ao estado inicial, como se tivesse sido instalado pela primeira vez.
+  </div>
+
+  <h3>Opção B — Desinstalar o aplicativo</h3>
+  <ol class="steps">
+    <li>Pressione e segure o ícone do <strong>Minha Nota Financeira</strong> na sua tela inicial</li>
+    <li>Selecione <strong>Desinstalar</strong> (ou arraste para "Desinstalar")</li>
+    <li>Confirme a desinstalação</li>
+  </ol>
+  <p>
+    Ao desinstalar o aplicativo, <strong>todos os dados locais são automaticamente removidos</strong>
+    do seu dispositivo.
+  </p>
+
+  <h2>3. Dados de terceiros (Analytics e Publicidade)</h2>
+
+  <p>
+    O aplicativo utiliza serviços de terceiros que podem coletar dados anônimos:
+  </p>
+
+  <h3>Firebase Analytics (Google)</h3>
+  <p>
+    Dados anônimos de uso (telas visitadas, tempo de sessão, tipo de dispositivo) são coletados
+    pelo Firebase Analytics. Para solicitar a exclusão desses dados:
+  </p>
+  <ul>
+    <li>Acesse <a href="https://myaccount.google.com/data-and-privacy" target="_blank" rel="noopener">Minha Conta Google — Dados e privacidade</a></li>
+    <li>Gerencie suas configurações de atividade e dados</li>
+  </ul>
+
+  <h3>Google AdMob</h3>
+  <p>
+    Para gerenciar ou redefinir seu identificador de publicidade:
+  </p>
+  <ul>
+    <li><strong>Android:</strong> Configurações → Google → Anúncios → Redefinir ID de publicidade ou Excluir ID de publicidade</li>
+    <li>Você também pode desativar a personalização de anúncios nas mesmas configurações</li>
+  </ul>
+
+  <h2>4. Solicitar exclusão por e-mail</h2>
+
+  <p>
+    Se você deseja confirmar a exclusão dos seus dados ou tem alguma dúvida,
+    entre em contato conosco:
+  </p>
+
+  <div class="highlight-box gold">
+    <p><strong>AppFactory</strong></p>
+    <p>E-mail: <a href="mailto:contato@appfactory.com.br?subject=Solicita%C3%A7%C3%A3o%20de%20Exclus%C3%A3o%20de%20Dados%20-%20Minha%20Nota%20Financeira">contato@appfactory.com.br</a></p>
+    <br>
+    <p>
+      Ao enviar o e-mail, inclua no assunto: <strong>"Solicitação de Exclusão de Dados — Minha Nota Financeira"</strong>.
+    </p>
+    <p>
+      Responderemos sua solicitação em até <strong>15 dias úteis</strong>, conforme previsto
+      na Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018).
+    </p>
+  </div>
+
+  <h2>5. Seus direitos (LGPD)</h2>
+
+  <p>
+    De acordo com a Lei Geral de Proteção de Dados (LGPD), você tem direito a:
+  </p>
+  <ul>
+    <li>Confirmação da existência de tratamento de dados</li>
+    <li>Acesso aos dados coletados</li>
+    <li>Correção de dados incompletos ou desatualizados</li>
+    <li>Anonimização, bloqueio ou <strong>eliminação de dados</strong> desnecessários</li>
+    <li>Informação sobre compartilhamento de dados</li>
+    <li>Revogação do consentimento</li>
+  </ul>
+
+  <div class="highlight-box green">
+    <strong>Nota:</strong> Como o Minha Nota Financeira não coleta dados pessoais identificáveis
+    e armazena informações apenas localmente no dispositivo do usuário, a maioria desses
+    direitos já é atendida por padrão. Você tem controle total sobre seus dados.
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>© 2026 AppFactory. Todos os direitos reservados.</p>
+  <p style="margin-top: 8px;">
+    <a href="/privacy-policy.html">Política de Privacidade</a>
+  </p>
+</div>
+
+</body>
+</html>
