@@ -101,8 +101,6 @@ ZONAS DA NOTA:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Baixe agora e descubra sua nota financeira. É rápido, gratuito e pode mudar sua vida financeira.
-
-#finanças #educaçãofinanceira #notafinanceira #dívidas #controle
 ```
 
 ---
