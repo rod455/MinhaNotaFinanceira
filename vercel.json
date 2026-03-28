@@ -7,6 +7,14 @@
       "destination": "/data-deletion.html"
     },
     {
+      "source": "/privacy-policy",
+      "destination": "/privacy-policy.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy-policy.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

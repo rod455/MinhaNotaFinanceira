@@ -3,320 +3,682 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Política de Privacidade — Minha Nota Financeira</title>
+  <title>Minha Nota Financeira — Descubra sua saúde financeira</title>
+  <meta name="description" content="Descubra sua nota financeira em 60 segundos. Sem cadastro, sem dados bancários, 100% gratuito.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    :root {
+      --primary: #1e3a8a;
+      --primary-dark: #0B1838;
+      --accent: #F5A820;
+      --accent-hover: #e09a1a;
+      --green: #1DBE75;
+      --cyan: #17C8E8;
+      --text: #1a1a2e;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --bg: #ffffff;
+      --bg-alt: #f8fafc;
+      --border: #e2e8f0;
+      --card-bg: #ffffff;
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      background-color: #0B1838;
-      color: #CBD2D9;
-      line-height: 1.7;
-      padding: 0;
-    }
-
-    .header {
-      background: linear-gradient(135deg, #0B1838, #060D1F);
-      padding: 48px 24px 32px;
-      text-align: center;
-      border-bottom: 3px solid #F5A820;
-    }
-
-    .header h1 {
-      color: #FFFFFF;
-      font-size: 28px;
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-
-    .header .gold { color: #F5A820; }
-
-    .header p {
-      color: #9AA5B4;
-      font-size: 14px;
-      margin-top: 8px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
     .container {
-      max-width: 720px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 32px 24px 64px;
+      padding: 0 24px;
     }
 
-    .update-date {
-      background: #132248;
-      padding: 12px 16px;
-      border-radius: 8px;
+    /* ── Header ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 16px;
+      padding-bottom: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--primary);
+    }
+
+    .logo svg { width: 28px; height: 28px; }
+
+    .logo span {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    nav { display: flex; align-items: center; gap: 28px; }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--primary); }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, #0f2460 100%);
+      color: #fff;
+      padding: 80px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(245,168,32,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero .container { position: relative; z-index: 1; }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50px;
       font-size: 13px;
-      color: #9AA5B4;
-      margin-bottom: 32px;
-      border-left: 4px solid #F5A820;
-    }
-
-    h2 {
-      color: #FFFFFF;
-      font-size: 20px;
-      font-weight: 700;
-      margin-top: 32px;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid #132248;
-    }
-
-    h3 {
-      color: #F5A820;
-      font-size: 16px;
       font-weight: 600;
-      margin-top: 20px;
+      margin-bottom: 28px;
+      color: var(--accent);
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 60px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      max-width: 700px;
+    }
+
+    .hero h1 .accent { color: var(--accent); }
+
+    .hero p {
+      font-size: 18px;
+      color: rgba(255,255,255,0.8);
+      max-width: 560px;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn svg { width: 20px; height: 20px; }
+
+    .btn-accent {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-accent:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,168,32,0.3); }
+
+    .btn-outline-white {
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.3);
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.5); }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-primary:hover { background: #163278; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(30,58,138,0.3); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--primary); background: rgba(30,58,138,0.04); }
+
+    /* ── Steps ── */
+    .steps {
+      padding: 80px 0;
+      background: var(--bg-alt);
+    }
+
+    .section-header {
+      max-width: 600px;
+      margin-bottom: 48px;
+    }
+
+    .section-header h2 {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .section-header p {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+
+    .step-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 20px;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .step-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+    }
+
+    .step-number {
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+
+    .step-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .step-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── Security ── */
+    .security {
+      padding: 80px 0;
+    }
+
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .security-card {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .security-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+    }
+
+    .security-card .icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(30,58,138,0.08);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .security-card .icon svg { width: 24px; height: 24px; color: var(--primary); }
+
+    .security-card h3 {
+      font-size: 18px;
+      font-weight: 700;
       margin-bottom: 8px;
     }
 
-    p {
-      margin-bottom: 12px;
-      font-size: 15px;
+    .security-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
     }
 
-    ul {
-      margin-bottom: 12px;
-      padding-left: 20px;
+    /* ── Legal Cards (Privacy + Data Deletion) ── */
+    .legal {
+      padding: 60px 0 80px;
+      background: var(--bg-alt);
     }
 
-    li {
-      margin-bottom: 6px;
-      font-size: 15px;
+    .legal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
-    strong { color: #FFFFFF; }
-
-    a {
-      color: #17C8E8;
-      text-decoration: none;
+    .legal-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    a:hover { text-decoration: underline; }
-
-    .highlight-box {
-      background: #132248;
-      border-radius: 12px;
-      padding: 20px;
-      margin: 20px 0;
-      border: 1px solid #1a2d5a;
+    .legal-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
     }
 
-    .highlight-box.green {
-      border-left: 4px solid #1DBE75;
+    .legal-card .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
     }
 
-    .highlight-box.gold {
-      border-left: 4px solid #F5A820;
+    .legal-card .icon svg { width: 26px; height: 26px; }
+
+    .legal-card .icon.blue {
+      background: rgba(30,58,138,0.1);
+    }
+    .legal-card .icon.blue svg { color: var(--primary); }
+
+    .legal-card .icon.red {
+      background: rgba(231,76,60,0.1);
+    }
+    .legal-card .icon.red svg { color: #E74C3C; }
+
+    .legal-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
     }
 
-    .footer {
+    .legal-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      flex: 1;
+    }
+
+    .legal-card .btn { align-self: flex-start; }
+
+    /* ── CTA ── */
+    .cta {
+      padding: 80px 0;
       text-align: center;
-      padding: 32px 24px;
-      border-top: 1px solid #132248;
-      font-size: 13px;
-      color: #616E7C;
     }
 
-    .footer a { color: #F5A820; }
+    .cta h2 {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
 
-    @media (max-width: 480px) {
-      .header h1 { font-size: 22px; }
-      .container { padding: 24px 16px 48px; }
-      h2 { font-size: 18px; }
+    .cta p {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── Compliance Banner ── */
+    .compliance {
+      background: var(--primary);
+      color: #fff;
+      border-radius: 20px;
+      padding: 40px;
+      margin-top: 40px;
+    }
+
+    .compliance h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .compliance > p {
+      color: rgba(255,255,255,0.7);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .compliance-badges {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .compliance-badge {
+      text-align: center;
+    }
+
+    .compliance-badge strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .compliance-badge span {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      background: var(--bg-alt);
+    }
+
+    footer .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    footer p {
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    footer .links {
+      display: flex;
+      gap: 24px;
+    }
+
+    footer .links a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer .links a:hover { color: var(--primary); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .steps-grid { grid-template-columns: repeat(3, 1fr); }
+      .security-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      nav { display: none; }
+      .hero { padding: 56px 0 72px; }
+      .hero h1 { font-size: 32px; }
+      .hero p { font-size: 16px; }
+      .hero-buttons { flex-direction: column; }
+      .hero-buttons .btn { justify-content: center; }
+      .steps { padding: 56px 0; }
+      .steps-grid { grid-template-columns: 1fr 1fr; }
+      .security { padding: 56px 0; }
+      .security-grid { grid-template-columns: 1fr; }
+      .legal-grid { grid-template-columns: 1fr; }
+      .section-header h2 { font-size: 28px; }
+      .cta h2 { font-size: 28px; }
+      .compliance { padding: 28px 20px; }
+      .compliance-badges { gap: 20px; }
     }
   </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>Política de Privacidade</h1>
-  <h1><span class="gold">Minha Nota Financeira</span></h1>
-  <p>AppFactory (appfactory.rlm)</p>
-</div>
-
-<div class="container">
-
-  <div class="update-date">
-    <strong>Última atualização:</strong> 27 de março de 2026
+<!-- Header -->
+<header>
+  <div class="container">
+    <a href="/" class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span>Minha Nota Financeira</span>
+    </a>
+    <nav>
+      <a href="#como-funciona">Como Funciona</a>
+      <a href="#seguranca">Seguranca</a>
+      <a href="/privacy-policy.html">Privacidade</a>
+      <a href="/data-deletion.html">Exclusao de Dados</a>
+    </nav>
   </div>
+</header>
 
-  <p>
-    A AppFactory ("nós", "nosso") opera o aplicativo <strong>Minha Nota Financeira</strong>
-    ("App"). Esta Política de Privacidade descreve como coletamos, usamos e protegemos
-    suas informações quando você utiliza nosso App.
-  </p>
-
-  <div class="highlight-box green">
-    <strong>Resumo:</strong> O Minha Nota Financeira foi projetado com privacidade em mente.
-    Não pedimos cadastro, não coletamos seu nome, CPF, e-mail ou dados bancários.
-    Suas respostas ao questionário ficam apenas no seu dispositivo.
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">Descubra sua nota financeira em 60 segundos</div>
+    <h1>Sua Saude Financeira <span class="accent">em Numeros</span></h1>
+    <p>Diagnostico rapido que te da uma nota de 0 a 100 baseada em 5 perguntas simples. Sem cadastro, sem dados bancarios, 100% gratuito.</p>
+    <div class="hero-buttons">
+      <a href="https://play.google.com/store/apps/details?id=com.appfactory.minhanotafinanceira" class="btn btn-accent" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Baixar na Play Store
+      </a>
+      <a href="#como-funciona" class="btn btn-outline-white">
+        Saiba Mais
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
   </div>
+</section>
 
-  <h2>1. Informações que coletamos</h2>
-
-  <h3>1.1. Dados que NÃO coletamos</h3>
-  <ul>
-    <li>Nome, CPF, RG ou qualquer documento de identificação</li>
-    <li>E-mail, telefone ou endereço</li>
-    <li>Dados bancários, número de cartão ou senhas</li>
-    <li>Localização precisa (GPS)</li>
-  </ul>
-
-  <h3>1.2. Dados do questionário</h3>
-  <p>
-    As respostas que você fornece no questionário financeiro (faixa de renda, gastos
-    estimados, situação de dívida, sobra mensal e reserva de emergência) são processadas
-    <strong>localmente no seu dispositivo</strong> para calcular sua nota financeira.
-    Esses dados não são enviados para nossos servidores de forma identificável.
-  </p>
-
-  <h3>1.3. Dados anônimos agregados</h3>
-  <p>
-    Podemos coletar dados <strong>anônimos e agregados</strong> (como a nota média dos
-    usuários por região) para fins estatísticos e melhoria do App. Esses dados não
-    permitem identificar você individualmente.
-  </p>
-
-  <h3>1.4. Dados de uso (Analytics)</h3>
-  <p>
-    Utilizamos o <strong>Firebase Analytics</strong> (Google) para coletar dados anônimos
-    de uso do App, incluindo:
-  </p>
-  <ul>
-    <li>Eventos de navegação (telas visitadas, botões clicados)</li>
-    <li>Tempo de sessão</li>
-    <li>Tipo de dispositivo e versão do sistema operacional</li>
-    <li>País e idioma do dispositivo</li>
-  </ul>
-  <p>
-    Esses dados são coletados de forma anônima e são utilizados exclusivamente para
-    melhorar a experiência do usuário. Para mais informações, consulte a
-    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Política de Privacidade do Google</a>.
-  </p>
-
-  <h2>2. Publicidade</h2>
-
-  <p>
-    O App exibe anúncios fornecidos pelo <strong>Google AdMob</strong>. O Google AdMob
-    pode coletar e usar dados para personalizar anúncios, incluindo:
-  </p>
-  <ul>
-    <li>Identificador de publicidade do dispositivo (GAID no Android, IDFA no iOS)</li>
-    <li>Dados de interação com anúncios</li>
-    <li>Informações do dispositivo</li>
-  </ul>
-  <p>
-    Você pode optar por não receber anúncios personalizados nas configurações do seu
-    dispositivo (Configurações → Google → Anúncios → Desativar personalização de anúncios).
-  </p>
-  <p>
-    Para mais informações sobre como o Google usa seus dados em anúncios, visite:
-    <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">Como o Google usa dados de apps</a>.
-  </p>
-
-  <h3>Formatos de anúncios utilizados</h3>
-  <ul>
-    <li><strong>Anúncios intersticiais:</strong> exibidos em telas de transição</li>
-    <li><strong>Anúncios premiados (rewarded):</strong> exibidos voluntariamente pelo usuário para desbloquear conteúdo adicional</li>
-    <li><strong>Banners:</strong> exibidos no rodapé de algumas telas</li>
-    <li><strong>Anúncios de abertura (App Open):</strong> exibidos ao abrir o aplicativo</li>
-  </ul>
-
-  <h2>3. Links de terceiros</h2>
-
-  <p>
-    O App pode conter links para sites e serviços de terceiros, como instituições
-    financeiras, plataformas de renegociação de dívidas e cursos de educação financeira.
-    Esses links são fornecidos como sugestão e conveniência. Não nos responsabilizamos
-    pelas práticas de privacidade ou conteúdo desses sites externos.
-  </p>
-  <p>
-    Recomendamos que você leia a política de privacidade de cada site que visitar.
-  </p>
-
-  <h2>4. Compartilhamento de dados</h2>
-
-  <div class="highlight-box gold">
-    <strong>Não vendemos seus dados.</strong> Não compartilhamos informações pessoais
-    identificáveis com terceiros para fins comerciais.
+<!-- Como Funciona -->
+<section class="steps" id="como-funciona">
+  <div class="container">
+    <div class="section-header">
+      <h2>Como Funciona</h2>
+      <p>Em 5 passos simples, voce descobre sua nota financeira e recebe um plano de acao personalizado.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3>Responda</h3>
+        <p>5 perguntas sobre sua situacao financeira</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3>Calcule</h3>
+        <p>Sua nota e calculada em tempo real</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3>Visualize</h3>
+        <p>Veja seu resultado em graficos claros</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <h3>Planeje</h3>
+        <p>Receba dicas personalizadas para melhorar</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">5</div>
+        <h3>Compartilhe</h3>
+        <p>Desafie amigos e compare resultados</p>
+      </div>
+    </div>
   </div>
+</section>
 
-  <p>Seus dados podem ser compartilhados apenas nas seguintes situações:</p>
-  <ul>
-    <li><strong>Google (Firebase/AdMob):</strong> dados anônimos de analytics e publicidade, conforme descrito acima</li>
-    <li><strong>Por sua escolha:</strong> quando você voluntariamente compartilha seu resultado (card de nota financeira) via WhatsApp, TikTok ou outras redes sociais</li>
-    <li><strong>Obrigação legal:</strong> quando exigido por lei ou ordem judicial</li>
-  </ul>
+<!-- Seguranca -->
+<section class="security" id="seguranca">
+  <div class="container">
+    <div class="section-header">
+      <h2>Seguranca & Privacidade</h2>
+      <p>Seus dados sao sua responsabilidade. Por isso, protegemos sua privacidade desde o inicio.</p>
+    </div>
 
-  <h2>5. Armazenamento e segurança</h2>
+    <div class="security-grid">
+      <div class="security-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h3>Dados Locais</h3>
+        <p>Suas respostas ficam apenas no seu dispositivo. Nunca enviamos seus dados para nossos servidores.</p>
+      </div>
+      <div class="security-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Sem Cadastro</h3>
+        <p>Nao pedimos email, CPF ou qualquer dado pessoal. Use o app completamente anonimo.</p>
+      </div>
+      <div class="security-card">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <h3>Controle Total</h3>
+        <p>Voce controla seus dados. Pode deletar tudo a qualquer momento com um toque.</p>
+      </div>
+    </div>
 
-  <p>
-    Os dados do questionário são armazenados <strong>localmente no seu dispositivo</strong>
-    e não são transmitidos para servidores externos de forma identificável.
-  </p>
-  <p>
-    Dados anônimos agregados podem ser armazenados em servidores seguros (Supabase)
-    com criptografia em trânsito (TLS) e em repouso.
-  </p>
-
-  <h2>6. Menores de idade</h2>
-
-  <p>
-    O Minha Nota Financeira <strong>não é direcionado a menores de 18 anos</strong>.
-    Não coletamos intencionalmente dados de crianças ou adolescentes. Se tomarmos
-    conhecimento de que coletamos dados de um menor, tomaremos medidas para excluí-los
-    imediatamente.
-  </p>
-
-  <h2>7. Seus direitos (LGPD)</h2>
-
-  <p>
-    De acordo com a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018),
-    você tem os seguintes direitos:
-  </p>
-  <ul>
-    <li>Confirmação da existência de tratamento de dados</li>
-    <li>Acesso aos dados coletados</li>
-    <li>Correção de dados incompletos ou desatualizados</li>
-    <li>Anonimização, bloqueio ou eliminação de dados desnecessários</li>
-    <li>Informação sobre compartilhamento de dados</li>
-    <li>Revogação do consentimento</li>
-  </ul>
-  <p>
-    Como o App não coleta dados pessoais identificáveis, a maioria desses direitos
-    já é atendida por padrão. Para exercer qualquer direito, entre em contato conosco.
-  </p>
-
-  <h2>8. Alterações nesta política</h2>
-
-  <p>
-    Podemos atualizar esta Política de Privacidade periodicamente. Quaisquer alterações
-    serão publicadas nesta página com a data de atualização revisada. Recomendamos
-    que você revise esta política regularmente.
-  </p>
-
-  <h2>9. Contato</h2>
-
-  <div class="highlight-box gold">
-    <p>
-      Se você tiver dúvidas sobre esta Política de Privacidade ou sobre o tratamento
-      dos seus dados, entre em contato:
-    </p>
-    <br>
-    <p><strong>AppFactory</strong></p>
-    <p>E-mail: <a href="mailto:contato@appfactory.com.br">contato@appfactory.com.br</a></p>
+    <div class="compliance">
+      <h3>Conformidade Legal</h3>
+      <p>O Minha Nota Financeira esta em conformidade com as principais regulacoes de protecao de dados.</p>
+      <div class="compliance-badges">
+        <div class="compliance-badge">
+          <strong>LGPD</strong>
+          <span>Brasil</span>
+        </div>
+        <div class="compliance-badge">
+          <strong>GDPR</strong>
+          <span>Europa</span>
+        </div>
+        <div class="compliance-badge">
+          <strong>Play Store</strong>
+          <span>Politicas</span>
+        </div>
+        <div class="compliance-badge">
+          <strong>App Store</strong>
+          <span>Politicas</span>
+        </div>
+      </div>
+    </div>
   </div>
+</section>
 
-</div>
+<!-- Legal Links -->
+<section class="legal" id="legal">
+  <div class="container">
+    <div class="section-header" style="text-align:center; max-width:600px; margin: 0 auto 48px;">
+      <h2>Transparencia & Seus Direitos</h2>
+      <p>Acesse nossas politicas e saiba como exercer seus direitos sobre seus dados.</p>
+    </div>
+    <div class="legal-grid">
+      <div class="legal-card">
+        <div class="icon blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Politica de Privacidade</h3>
+        <p>Conheca como protegemos seus dados, quais informacoes coletamos e como voce pode controlar suas informacoes pessoais.</p>
+        <a href="/privacy-policy.html" class="btn btn-primary">
+          Ler Politica Completa
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <div class="legal-card">
+        <div class="icon red">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+        </div>
+        <h3>Exclusao de Dados</h3>
+        <p>Saiba como deletar todos os seus dados do aplicativo e exercer seu direito ao esquecimento conforme a LGPD.</p>
+        <a href="/data-deletion.html" class="btn btn-outline">
+          Ver Instrucoes
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-<div class="footer">
-  <p>© 2026 AppFactory. Todos os direitos reservados.</p>
-  <p style="margin-top: 8px;">
-    <a href="/">Minha Nota Financeira</a>
-  </p>
-</div>
+<!-- CTA -->
+<section class="cta">
+  <div class="container">
+    <h2>Pronto para Descobrir Sua Nota?</h2>
+    <p>Leva menos de 1 minuto. Sem cadastro. Sem dados bancarios. 100% gratuito.</p>
+    <a href="https://play.google.com/store/apps/details?id=com.appfactory.minhanotafinanceira" class="btn btn-accent" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Baixar Agora
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>&copy; 2026 AppFactory. Todos os direitos reservados.</p>
+    <div class="links">
+      <a href="/privacy-policy.html">Privacidade</a>
+      <a href="/data-deletion.html">Exclusao de Dados</a>
+      <a href="mailto:contato@appfactory.com.br">Contato</a>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
