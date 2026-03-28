@@ -3,6 +3,10 @@
   "outputDirectory": "privacy-policy",
   "rewrites": [
     {
+      "source": "/data-deletion",
+      "destination": "/data-deletion.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
