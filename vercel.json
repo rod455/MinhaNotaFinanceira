@@ -3,6 +3,10 @@
   "outputDirectory": "privacy-policy",
   "rewrites": [
     {
+      "source": "/app-ads.txt",
+      "destination": "/app-ads.txt"
+    },
+    {
       "source": "/data-deletion",
       "destination": "/data-deletion.html"
     },
