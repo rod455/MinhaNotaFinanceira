@@ -1,6 +1,7 @@
 {
   "buildCommand": null,
   "outputDirectory": "privacy-policy",
+  "cleanUrls": true,
   "rewrites": [
     {
       "source": "/data-deletion",
@@ -13,18 +14,13 @@
     {
       "source": "/privacy",
       "destination": "/privacy-policy.html"
-    },
-    {
-      "source": "/((?!.*\\.).*)",
-      "destination": "/index.html"
     }
   ],
   "headers": [
     {
       "source": "/app-ads.txt",
       "headers": [
-        { "key": "Content-Type", "value": "text/plain" },
-        { "key": "Cache-Control", "value": "public, max-age=86400" }
+        { "key": "Content-Type", "value": "text/plain; charset=utf-8" }
       ]
     },
     {
