@@ -11,6 +11,7 @@ import ActionPlanScreen from '../screens/ActionPlanScreen';
 import DetailedPlanScreen from '../screens/DetailedPlanScreen';
 import ShareScreen from '../screens/ShareScreen';
 import SimulationScreen from '../screens/SimulationScreen';
+import TipDetailScreen from '../screens/TipDetailScreen';
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -21,6 +22,7 @@ export type RootStackParamList = {
   DetailedPlan: { answers: QuizAnswers; score: ScoreResult };
   Share: { score: ScoreResult };
   Simulation: { answers: QuizAnswers; score: ScoreResult };
+  TipDetail: { tipKey: string; tipTitle: string };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -48,6 +50,7 @@ export default function AppNavigator() {
         <Stack.Screen name="DetailedPlan" component={DetailedPlanScreen} />
         <Stack.Screen name="Share" component={ShareScreen} />
         <Stack.Screen name="Simulation" component={SimulationScreen} />
+        <Stack.Screen name="TipDetail" component={TipDetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

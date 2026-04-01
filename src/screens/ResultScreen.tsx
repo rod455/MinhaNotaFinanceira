@@ -13,7 +13,9 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '../navigation/AppNavigator';
 import { COLORS, SPACING, BORDER_RADIUS, SCORE_ZONES, NATIONAL_AVERAGE } from '../constants/theme';
+import { ScoreResult } from '../types';
 import { getContextualPhrase } from '../utils/scoring';
+import { showInterstitial } from '../utils/ads';
 import AdBanner from '../components/AdBanner';
 
 const { width } = Dimensions.get('window');
@@ -138,15 +140,27 @@ export default function ResultScreen({ navigation, route }: Props) {
             {getContextualPhrase(score.total)}
           </Text>
 
-          {/* Breakdown */}
-          <View style={styles.breakdownContainer}>
-            <Text style={styles.breakdownTitle}>Detalhamento da nota</Text>
-            <BreakdownRow label="Sobra mensal" value={score.breakdown.sobraMensal} />
-            <BreakdownRow label="Nível de dívida" value={score.breakdown.nivelDivida} />
-            <BreakdownRow label="Adimplência" value={score.breakdown.adimplencia} />
-            <BreakdownRow label="Reserva de emergência" value={score.breakdown.reservaEmergencia} />
-            <BreakdownRow label="Comprometimento de renda" value={score.breakdown.comprometimentoRenda} />
-          </View>
+          {/* Improvement Points */}
+          {score.total < 100 && (
+            <View style={styles.improvementContainer}>
+              <Text style={styles.improvementTitle}>Pontos de melhoria</Text>
+              <Text style={styles.improvementText}>
+                {getImprovementText(score)}
+              </Text>
+              <TouchableOpacity
+                style={styles.improvementButton}
+                activeOpacity={0.8}
+                onPress={async () => {
+                  await showInterstitial();
+                  navigation.navigate('ActionPlan', { answers, score });
+                }}
+              >
+                <Text style={styles.improvementButtonText}>
+                  Clique aqui para saber mais →
+                </Text>
+              </TouchableOpacity>
+            </View>
+          )}
         </Animated.View>
       </ScrollView>
 
@@ -175,6 +189,28 @@ export default function ResultScreen({ navigation, route }: Props) {
   );
 }
 
+function getImprovementText(score: ScoreResult): string {
+  const weakAreas: string[] = [];
+  const { breakdown } = score;
+
+  if (breakdown.sobraMensal < 15) weakAreas.push('sobra mensal');
+  if (breakdown.nivelDivida < 15) weakAreas.push('controle de dívidas');
+  if (breakdown.adimplencia < 15) weakAreas.push('adimplência');
+  if (breakdown.reservaEmergencia < 15) weakAreas.push('reserva de emergência');
+  if (breakdown.comprometimentoRenda < 15) weakAreas.push('comprometimento de renda');
+
+  if (weakAreas.length === 0) {
+    return `Você está quase lá! Faltam apenas ${100 - score.total} pontos para chegar a 100.`;
+  }
+
+  if (weakAreas.length === 1) {
+    return `Você precisa evoluir em ${weakAreas[0]} para sua nota chegar a 100.`;
+  }
+
+  const last = weakAreas.pop();
+  return `Você precisa evoluir em ${weakAreas.join(', ')} e ${last} para sua nota chegar a 100.`;
+}
+
 function AnimatedScoreText({ countAnim, color }: { countAnim: Animated.Value; color: string }) {
   const [display, setDisplay] = React.useState(0);
 
@@ -186,28 +222,6 @@ function AnimatedScoreText({ countAnim, color }: { countAnim: Animated.Value; co
   }, []);
 
   return <Text style={[styles.scoreNumber, { color }]}>{display}</Text>;
-}
-
-function BreakdownRow({ label, value }: { label: string; value: number }) {
-  const percentage = (value / 20) * 100;
-  const color =
-    percentage >= 80 ? COLORS.green :
-    percentage >= 60 ? COLORS.greenLight :
-    percentage >= 40 ? COLORS.yellow :
-    percentage >= 20 ? COLORS.orange :
-    COLORS.red;
-
-  return (
-    <View style={styles.breakdownRow}>
-      <View style={styles.breakdownInfo}>
-        <Text style={styles.breakdownLabel}>{label}</Text>
-        <Text style={[styles.breakdownValue, { color }]}>{value}/20</Text>
-      </View>
-      <View style={styles.breakdownBar}>
-        <View style={[styles.breakdownBarFill, { width: `${percentage}%`, backgroundColor: color }]} />
-      </View>
-    </View>
-  );
 }
 
 const styles = StyleSheet.create({
@@ -310,46 +324,38 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.lg,
     paddingHorizontal: SPACING.sm,
   },
-  breakdownContainer: {
+  improvementContainer: {
     width: '100%',
     backgroundColor: COLORS.navyLight,
     borderRadius: BORDER_RADIUS.lg,
-    padding: SPACING.md,
+    padding: SPACING.lg,
     marginBottom: SPACING.md,
+    borderWidth: 1,
+    borderColor: COLORS.gold + '30',
   },
-  breakdownTitle: {
-    fontSize: 14,
+  improvementTitle: {
+    fontSize: 16,
     fontWeight: '700',
-    color: COLORS.gray300,
-    marginBottom: SPACING.md,
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-  },
-  breakdownRow: {
+    color: COLORS.gold,
     marginBottom: SPACING.sm,
   },
-  breakdownInfo: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 4,
+  improvementText: {
+    fontSize: 14,
+    color: COLORS.gray300,
+    lineHeight: 22,
+    marginBottom: SPACING.md,
   },
-  breakdownLabel: {
-    fontSize: 13,
-    color: COLORS.gray400,
+  improvementButton: {
+    backgroundColor: COLORS.gold + '20',
+    paddingVertical: SPACING.sm + 2,
+    paddingHorizontal: SPACING.md,
+    borderRadius: BORDER_RADIUS.md,
+    alignSelf: 'flex-start',
   },
-  breakdownValue: {
-    fontSize: 13,
+  improvementButtonText: {
+    fontSize: 14,
     fontWeight: '700',
-  },
-  breakdownBar: {
-    height: 6,
-    backgroundColor: COLORS.navyDark,
-    borderRadius: 3,
-    overflow: 'hidden',
-  },
-  breakdownBarFill: {
-    height: '100%',
-    borderRadius: 3,
+    color: COLORS.gold,
   },
   bottomContainer: {
     paddingHorizontal: SPACING.lg,

@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   ScrollView,
   StatusBar,
-  Linking,
 } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RouteProp } from '@react-navigation/native';
@@ -21,24 +20,9 @@ type Props = {
   route: RouteProp<RootStackParamList, 'ActionPlan'>;
 };
 
-// Placeholder affiliate links (to be updated via Remote Config)
-const AFFILIATE_LINKS: Record<string, string> = {
-  serasa: 'https://www.serasa.com.br/limpa-nome-online',
-  creditas: 'https://www.creditas.com/emprestimo-pessoal',
-  banco_digital: 'https://nubank.com.br',
-  mobills: 'https://www.mobills.com.br',
-  hotmart: 'https://hotmart.com/pt-br/category/financas-e-negocios',
-};
-
 export default function ActionPlanScreen({ navigation, route }: Props) {
   const { answers, score } = route.params;
   const tips = generateActionPlan(answers, score);
-
-  const handleAffiliateClick = (partner?: string) => {
-    if (partner && AFFILIATE_LINKS[partner]) {
-      Linking.openURL(AFFILIATE_LINKS[partner]);
-    }
-  };
 
   return (
     <View style={styles.container}>
@@ -74,7 +58,10 @@ export default function ActionPlanScreen({ navigation, route }: Props) {
               <TouchableOpacity
                 style={styles.affiliateButton}
                 activeOpacity={0.7}
-                onPress={() => handleAffiliateClick(tip.affiliatePartner)}
+                onPress={() => navigation.navigate('TipDetail', {
+                  tipKey: tip.affiliatePartner!,
+                  tipTitle: tip.title,
+                })}
               >
                 <Text style={styles.affiliateButtonText}>
                   Saiba mais →

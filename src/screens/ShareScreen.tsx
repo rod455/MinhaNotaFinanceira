@@ -16,6 +16,7 @@ import * as Sharing from 'expo-sharing';
 // expo-file-system used for image save (save feature simplified for MVP)
 import { RootStackParamList } from '../navigation/AppNavigator';
 import { COLORS, SPACING, BORDER_RADIUS, SCORE_ZONES, NATIONAL_AVERAGE } from '../constants/theme';
+import { showInterstitial } from '../utils/ads';
 
 const { width } = Dimensions.get('window');
 
@@ -142,7 +143,10 @@ export default function ShareScreen({ navigation, route }: Props) {
         <TouchableOpacity
           style={styles.whatsappButton}
           activeOpacity={0.8}
-          onPress={handleShare}
+          onPress={async () => {
+            await showInterstitial();
+            handleShare();
+          }}
         >
           <Text style={styles.whatsappButtonText}>
             💬 Compartilhar no WhatsApp
@@ -153,7 +157,10 @@ export default function ShareScreen({ navigation, route }: Props) {
           <TouchableOpacity
             style={styles.tiktokButton}
             activeOpacity={0.8}
-            onPress={handleShare}
+            onPress={async () => {
+              await showInterstitial();
+              handleShare();
+            }}
           >
             <Text style={styles.tiktokButtonText}>🎵 TikTok</Text>
           </TouchableOpacity>
